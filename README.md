@@ -1,2 +1,3 @@
-# Pandhi_Ayush_Assignment2
-Final assignment submission for CTA200H (2019)
+# CTA200H Final Assignment (2019)
+Author: Ayush Pandhi
+Date: May 17, 2019
