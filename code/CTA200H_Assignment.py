@@ -1,6 +1,8 @@
 #CTA200H Assignment - Python Script
 #Ayush Pandhi (1003227457)
-#May 17, 2019
+#May 19, 2019
+
+#------------------------------------------------------------------------------------------------------------------------------------------
 
 #Importing required modules
 import sys
@@ -9,7 +11,6 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from mpl_toolkits.mplot3d import Axes3D
 
-
 #Loading in ATNF catalog from a .txt file
 d3_num, d3_name, d3_jname, d3_gl, d3_gb, d3_dm, d3_rm, d3_dist, d3_zz, d3_xx, d3_yy = np.genfromtxt('ATNF_Data.txt', unpack=True)
 d3_name, d3_jname = np.genfromtxt('ATNF_Data.txt', usecols=(1,2), unpack=True, dtype=str)
@@ -17,6 +18,8 @@ d3_name, d3_jname = np.genfromtxt('ATNF_Data.txt', usecols=(1,2), unpack=True, d
 #Loading a second set which will be used later
 d3_num2, d3_name2, d3_jname2, d3_gl2, d3_gb2, d3_dm2, d3_rm2, d3_dist2, d3_zz2, d3_xx2, d3_yy2 = np.genfromtxt('ATNF_Data.txt', unpack=True)
 d3_name2, d3_jname2 = np.genfromtxt('ATNF_Data.txt', usecols=(1,2), unpack=True, dtype=str)
+
+#------------------------------------------------------------------------------------------------------------------------------------------
 
 #Finding the indicies for which RM is not given (I've set no RM values to 0 in the .txt file)
 rm_list = np.where(d3_rm == 0)
@@ -35,8 +38,9 @@ d3_xx = np.delete(d3_xx, rm_idx)
 d3_yy = np.delete(d3_yy, rm_idx)
 d3_zz = np.delete(d3_zz, rm_idx)
 
-#Some plots to get an idea of what's going on, these aren't required for the assignment
-#These plots are not saved as pdfs
+#------------------------------------------------------------------------------------------------------------------------------------------
+
+#Some plots just to get an idea of what's going on, these aren't required for the assignment and thus are not saved as pdfs
 
 #Galactic Projection in x-y coordinate frame with height restrictions
 plt.figure(figsize=(10,8))
@@ -72,9 +76,9 @@ ax.set_zlabel('z [kpc]', fontsize=10)
 ax.set_title('Galactic Coordinate Projection in 3 Dimensions with RM', fontsize=15)
 plt.show()
 
+#------------------------------------------------------------------------------------------------------------------------------------------
 
-#Same plots as above but with a colour map for RM, again these are not required for the assignment
-#These plots are not saved as pdfs
+#Same plots as above but with a colour map for RM, again these are not required for the assignment and thus are not saved as pdfs
 
 #Galactic Projection in x-y coordinate frame with RM colormap
 plt.figure(figsize=(10,8))
@@ -113,6 +117,7 @@ ax.set_zlabel('z [kpc]', fontsize=10)
 ax.set_title('Galactic Coordinate Projection in 3 Dimensions with RM Colormap', fontsize=15)
 plt.show()
 
+#------------------------------------------------------------------------------------------------------------------------------------------
 
 #Adding a condition for pulsars to be in the galactic plane
 h_list = np.where(np.abs(d3_zz) > 0.5)
@@ -131,8 +136,9 @@ d3h_xx = np.delete(d3_xx, h_idx)
 d3h_yy = np.delete(d3_yy, h_idx)
 d3h_zz = np.delete(d3_zz, h_idx)
 
-#Same as the last set of plots but now with a height restrcition
-#These plots are not saved as pdfs
+#------------------------------------------------------------------------------------------------------------------------------------------
+
+#Same as the last set of plots but with height restrcition, again these are not required for the assignment and thus are not saved as pdfs
 
 #Galactic Projection in x-y coordinate frame with RM colormap and z < 0.5kpc
 plt.figure(figsize=(10,8))
@@ -171,6 +177,7 @@ ax.set_zlabel('z [kpc]', fontsize=10)
 ax.set_title('Galactic Coordinate Projection in 3 Dimensions with RM Colormap and z > 0.5kpc', fontsize=15)
 plt.show()
 
+#------------------------------------------------------------------------------------------------------------------------------------------
 
 #Plotting rotation measure and dispersion measure relationship
 plt.figure(figsize=(10,8))
@@ -194,8 +201,9 @@ plt.ylim(-4000, 4000)
 plt.savefig('DM_RM_hredc_plot.pdf')
 plt.show()
 
+#------------------------------------------------------------------------------------------------------------------------------------------
 
-#Computing parallel component of magnetic field
+#Computing parallel component of magnetic field both with and without height restriction
 B_par = 1.232*(d3_rm/d3_dm)
 B_par2 = 1.232*(d3h_rm/d3h_dm)
 
@@ -219,14 +227,15 @@ plt.ylim(-15, 15)
 plt.savefig('GMF_Lat_plot.pdf')
 plt.show()
 
+#Printing average galactic magnetic field value for this data set
 print('Average GMF:', np.mean(B_par), '[$\mu G$]')
 
+#------------------------------------------------------------------------------------------------------------------------------------------
+
+#For these plots I had to flip the y axis and move it up by 0.5kpc as ATNF uses 8.5kpc as the solar circle radius while the Spitzer image uses -8.0kpc
 
 #Loading a Milky Way map as an overlay for data
 milkyway = mpimg.imread("MW_grid_crop.jpg")
-
-#For these plots I had to flip the y axis and move it up by 0.5kpc as ATNF uses 8.5kpc as the
-#solar circle radius while the Spitzer image uses -8.0kpc
 
 #Overplotting data with known Milky Way structure
 plt.figure(figsize=(15,15))
@@ -310,8 +319,9 @@ plt.colorbar(aspect=30, label='Parallel Magnetic Field [$\mu G$]')
 plt.savefig('Spitzer_GMF_hreduc_plot.pdf')
 plt.show()
 
+#------------------------------------------------------------------------------------------------------------------------------------------
 
-#Individual LOS plots; these plots are not saved as pdfs
+#Individual LOS plots; these plots are not saved as pdfs and do not shed a lot of light on the overall results on their own
 
 #Finding the indicies for longitude 30 degrees
 l27_list = np.where(d3_gl < 27)
@@ -656,6 +666,7 @@ plt.ylabel('Parallel Magnetic Field []', fontsize=10)
 plt.title('$l$=230 Magnetic Field vs. Distance', fontsize=15)
 plt.show()
 
+#------------------------------------------------------------------------------------------------------------------------------------------
 
 #Overplotting various LOS with the Spitzer image to see if there are any field reversals
 plt.figure(figsize=(20,15))
@@ -704,6 +715,7 @@ plt.colorbar(aspect=30, label='Parallel Magnetic Field [$\mu G$]')
 plt.savefig('LOS_plot.pdf')
 plt.show()
 
+#------------------------------------------------------------------------------------------------------------------------------------------
 
 #Loading CHIME pulsar data
 d4_name, d4_ra, d4_dec, d4_p0, d4_dm = np.genfromtxt('CHIME_Data.txt', unpack=True)
@@ -732,6 +744,7 @@ matches_name = np.array(matches_name)
 matches2 = np.array(matches2)
 matches_name2 = np.array(matches_name2)
 
+#------------------------------------------------------------------------------------------------------------------------------------------
 
 #Plotting CHIME Pulsars with known/unknown RM values
 plt.figure(figsize=(15,15))
