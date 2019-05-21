@@ -26,31 +26,31 @@
 % Header details (title, author, date)
 \title{CTA200H Assignment - Galactic Magnetic Field Preliminary Analysis}
 \author{Ayush Pandhi (\href{mailto:ayush.pandhi@mail.utoronto.ca}{ayush.pandhi@mail.utoronto.ca})}
-\date{May 17, 2019}
+\date{May 21, 2019}
 \maketitle
 
 % Introduction section
 \section{Introduction}
-    The goal of this preliminary assignment is to analyze previously existing pulsar rotation measure data, how it is distributed throughout the galaxy, whether or not it depicts any large scale galactic magnetic field structure, and compare to this to CHIME's catalog of pulsars to consider how this new data could add to the current understanding of the topic. 
+    The goal of this preliminary assignment is to analyze previously existing pulsar rotation measure data, how it is distributed throughout the galaxy, whether or not it depicts any large scale galactic magnetic field structure, and compare it to CHIME's catalog of pulsars to consider how this new data could add to the current understanding of the topic. 
     \\
     \\
-    The corresponding script primarily is used to generate relevant plots to analyze the above topics by using the PSRCAT and CHIME pulsar databases. It takes the raw databases and applies restrictions (i.e. limiting the set to only pulsars with rotation measure values and height restriction, $-0.5 kpc < z < 0.5 kpc$, to select pulsars specifically in the galactic plane) to generates plots in various projections of the galactic distribution of pulsars both with and without corresponding rotation measure values.
+    The corresponding script is primarily used to generate relevant plots to analyze the above topics by using the PSRCAT and CHIME pulsar databases. It takes the raw databases and applies restrictions (i.e. limiting the set to only pulsars with rotation measure values and restricting the height, $-0.5 kpc < z < 0.5 kpc$, to select pulsars specifically in the galactic plane) to generate plots in various projections of the galactic distribution of pulsars both with and without corresponding rotation measure values.
     \\
     \\
     Additionally, the script generates plots correlating dispersion measure and rotation measure to analyze if there is any clear relationship between the two quantities since they are both important towards computing the parallel magnetic field. Furthermore, the parallel magnetic field is analyzed using the relationship:
     \begin{equation}
-        B_{||} = 1.232 \frac{RM}{DM} \label{eq:1}
+        \langle B_{||} \rangle = 1.232 \frac{RM}{DM} \label{eq:1}
     \end{equation}
-    Where $RM$ is the rotation measure, $DM$ is the dispersion measure and $B_{||}$ is the parallel component of the magnetic field. This quantity is plotted as a function of galactic longitude and latitude and the average GMF is computed to observe any distinct galactic magnetic field structure.
+    Where $RM$ is the rotation measure, $DM$ is the dispersion measure and $B_{||}$ is the parallel component of the magnetic field. This quantity is plotted as a function of galactic longitude and latitude and the average galactic magnetic field is computed to observe any distinct large scale structure.
     \\
     \\
-    These results are over-plotted with the Spitzer Infrared map of the Milky Way to show clearly how these observations line up with the current understanding of the galaxy's large scale structure. Finally, the CHIME data is cross-checked with the PSRCAT database to see what new data can be provided for this study and how it can improve previous results considering the galactic magnetic field structure.
+    These results are over-plotted with the Spitzer Infrared map of the Milky Way to show clearly how these observations line up with the current understanding of the galaxy's large scale structure. Finally, the CHIME data is cross-checked with the PSRCAT database to see what new data can be provided for this study and how it can improve previous results regarding the galactic magnetic field structure.
 
 % Discussion section
 \section{Discussion}
 
 \subsection{Data Collection \& Reduction}
-	To being, the PSRCAT data set is saved into a .txt file to serve as readable data for the python script. A quick literature search does not reveal any new pulsars that are not already included in the catalog. PSRCAT was last updated with version 1.60 in December 2018 and thus is an accurate collection of observed pulsars to date with $RM$ measurements. 
+	To being, the PSRCAT data set is saved into a .txt file to serve as readable data for the python script. A quick literature search does not reveal any new pulsars that are not already included in the catalog. PSRCAT was last updated with version 1.60 in December 2018 and thus it is an accurate collection of observed pulsars to date with $RM$ measurements. 
 	\\
 	\\
 	The Spitzer infrared image of the Milky Way as well as the NE2001 Galactic free electron density model were saved for use in later plots. However, the quality of the NE2001 model plot is poor and thus the analysis and plots revolve around using the Spitzer image instead.
@@ -65,16 +65,16 @@
         {figure1.png}}
         \caption{\label{fig:1} $RM$ ($rad/m^{3}$) as a function of $DM$ ($pc/cm^{3}$) with PSRCAT data.}
     \end{figure}
-    Using equation \eqref{eq:1}, the parallel component of the magnetic field, $B_{||}$ (in units of $\mu G$), is then computed for the reduced data set and is plotted as a function of galactic longitude and latitude in figure \eqref{fig:2}. Additionally, the average galactic magnetic field value for the Milky Way is computed to be approximately, $B_{||} =$ 0.17 $\mu G$.
+    Using equation \eqref{eq:1}, the parallel component of the magnetic field, $\langle B_{||} \rangle$ (in units of $\mu G$), is then computed for the reduced data set and is plotted as a function of galactic longitude and latitude in figure \eqref{fig:2}. Additionally, the total average galactic magnetic field value for the Milky Way is computed to be approximately, $\langle B_{||} \rangle =$ 0.17 $\mu G$.
     \begin{figure}[!htb]
         \center{\includegraphics[width=\textwidth]
         {figure2.png}}
-        \caption{\label{fig:2} Parallel Magnetic Field ($B_{||}$) as a function of galactic longitude and latitude.}
+        \caption{\label{fig:2} Parallel Magnetic Field $\langle B_{||} \rangle$ as a function of galactic longitude and latitude.}
     \end{figure}
     Then, the pulsar distribution in the $RM$ reduced data set is over-plotted with the Spitzer infrared galactic map with a \textbf{(i)} binary colour scheme for positive/negative values of rotation measure, \textbf{(ii)} a full range colour map of rotation measure and \textbf{(iii)} a diverging colour map for parallel magnetic field values in figures \eqref{fig:3} - \eqref{fig:5}. This set of plots is also re-generated with the height restricted data set with $-0.5 kpc < z < 0.5 kpc$ in figures \eqref{fig:6} - \eqref{fig:8}. It can be seen that pulsar observations roughly correspond with the Milky Way's spiral arm structure; additionally the density of observed pulsars decreases as distance from the observer (Earth) increases, which is an expected result as it becomes increasingly difficult to observe pulsars that are farther away.
     \\
     \\
-    A total of eleven lines of sight (LOS) were selected as they pass through multiple arm structures and pulsars within $\pm 3^{o}$ of the selected longitudes are over-plotted with the Spitzer image and as a stand alone plot with a diverging colour map representing $B_{||}$ in figures \eqref{fig:9} - \eqref{fig:10}. There are also individual scatter plots generated for each LOS, however it is difficult to conclude anything from them as they have a small number of points and are quite messy, thus they are excluded from this report. From figures \eqref{fig:9} - \eqref{fig:10} some possible field reversals can be seen for $\ell = 310^{o}$ and $50^{o}$; however it is difficult to definitively conclude that there are field reversals due to the small number of points along each individual LOS.
+    A total of eleven lines of sight (LOS) were selected as they pass through multiple arm structures and pulsars within $\pm 3^{o}$ of the selected longitudes are over-plotted with the Spitzer image and as a stand alone plot with a diverging colour map representing $\langle B_{||} \rangle$ in figures \eqref{fig:9} - \eqref{fig:10}. There are also individual scatter plots generated for each LOS, however it is difficult to conclude anything from them as they have a small number of points and are quite messy, thus they are excluded from this report. From figures \eqref{fig:9} - \eqref{fig:10} some possible field reversals can be seen for $\ell = 310^{o}$ and $50^{o}$; however it is difficult to definitively conclude that there are field reversals due to the small number of points along each individual LOS.
     \\
     \\
     Comparing the CHIME data set to the PSRCAT catalog, pulsars with and without previously recorded rotation measures are found and over-plotted with the Spitzer map as well in figure \eqref{fig:11}. Out of CHIME's roughly 500 observed pulsars, approximately 100 of them do not have a $RM$ measurement yet.
